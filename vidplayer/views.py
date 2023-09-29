@@ -38,7 +38,7 @@ class ViewVideo(DetailView):
 
     def render_to_response(self, context, **response_kwargs):
         video = self.get_object()
-        video_file = video.video 
+        video_file = video.video
 
         response = FileResponse(video_file.open('rb'))
         response['Content-Type'] = 'video/mp4'  
