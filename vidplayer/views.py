@@ -10,27 +10,24 @@ from .serializers import VideoSerializer
 # Create your views here.
 
 class VideoView(generics.GenericAPIView):
-    queryset = Videos.objects.all()
     serializer_class = VideoSerializer
 
+    def get_queryset(self):
+        return Videos.objects.all()
+
     def post(self, request, *args, **kwargs):
-
         # Deserialize the request data using the serializer
-
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-
             # Save the video to the database
-
             serializer.save()
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, *args, **kwargs):
-        serializer = self.serializer_class(instance=self.queryset, many=True)
+        queryset = self.get_queryset()  # Call the get_queryset method
+        serializer = self.serializer_class(instance=queryset, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
-
-
 
 class ViewVideo(DetailView):
     model = Videos
