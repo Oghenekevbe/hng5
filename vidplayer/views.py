@@ -10,7 +10,7 @@ from .serializers import VideoSerializer
 # Create your views here.
 
 class VideoView(generics.GenericAPIView):
-    videos = Videos.objects.all()
+    queryset = Videos.objects.all()
     serializer_class = VideoSerializer
 
     def post(self, request, *args, **kwargs):
@@ -27,7 +27,7 @@ class VideoView(generics.GenericAPIView):
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, *args, **kwargs):
-        serializer = self.serializer_class(instance=self.videos, many=True)
+        serializer = self.serializer_class(instance=self.queryset, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
