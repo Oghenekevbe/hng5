@@ -4,3 +4,8 @@ django-autoslug
 django-restframework==0.0.1
 djangorestframework==3.14.0
 Pillow==9.5.0
+django-ffmpeg
+ffmpeg-python
+SpeechRecognition
+moviepy
+drf-yasg

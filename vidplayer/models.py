@@ -6,7 +6,8 @@ from autoslug import AutoSlugField
 
 class Videos(models.Model):
     title = models.CharField(max_length=50, null = True)
-    video = models.FileField( upload_to='videos/', null = True)
+    file = models.FileField( upload_to='videos/', null = True)
+    transcription = models.TextField(null = True)
     slug =AutoSlugField(unique=True, populate_from='title', null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
 
